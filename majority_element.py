@@ -1,25 +1,23 @@
 import unittest
-from collections import Counter
 from typing import List
 
 
-# https://leetcode.com/problems/majority-element
+# https://leetcode.com/problems/rotate-array/
 
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
-        majority_count = len(nums) // 2
-        counts = Counter(nums)
-        for k, v in counts.items():
-            if v > majority_count:
-                return k
+    def rotate(self, nums: List[int], k: int) -> None:
+        for i in range(k):
+            nums.insert(0, nums[-1])
+            nums.pop()
 
 
 class TestStringMethods(unittest.TestCase):
     def test_a(self):
         solution = Solution()
-        a = [3, 2, 2, 3]
+        a = [1, 2, 3, 4, 5, 6, 7]
+        solution.rotate(a, 3)
 
-        self.assertEqual(3, solution.majorityElement([3, 2, 3]))
+        self.assertEqual([5, 6, 7, 1, 2, 3, 4], a)
 
 
 if __name__ == "__main__":
