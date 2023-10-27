@@ -9,9 +9,8 @@ class Solution:
         result = 1
         for k, v in counts.items():
             if k == n:
-                result *= k ** (v - 1)
-            else:
-                result *= k ** v
+                v -= 1
+            result *= k ** v
         return result
 
     def productExceptSelf(self, nums: List[int]) -> List[int]:
