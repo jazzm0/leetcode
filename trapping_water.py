@@ -7,7 +7,7 @@ from typing import List
 class Solution:
 
     def sum_trap(self, height: List[int], start: int, end: int) -> int:
-        if end - start <= 1:
+        if end - start < 2:
             return 0
         s = 0
         h = min(height[start], height[end])
