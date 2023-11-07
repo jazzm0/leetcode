@@ -19,11 +19,8 @@ class Solution:
                 inc *= -1
 
         result = ""
-        for i in range(1, numRows + 1):
-            if i in d:
-                row = d[i]
-                for j in range(len(row)):
-                    result += row[j]
+        for v in d.values():
+            result += "".join(v)
         return result
 
 
