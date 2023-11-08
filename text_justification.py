@@ -7,18 +7,18 @@ from typing import List
 class Solution:
     def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
         result = []
-        i = 0
-        while i < len(words):
-            j, current_length, character_count = i + 1, len(words[i]), len(words[i])
+        start = 0
+        while start < len(words):
+            end, current_length, character_count = start + 1, len(words[start]), len(words[start])
             while current_length < maxWidth:
-                if j < len(words) and current_length + len(words[j]) < maxWidth:
-                    character_count += len(words[j])
-                    current_length += 1 + len(words[j])
-                    j += 1
+                if end < len(words) and current_length + len(words[end]) < maxWidth:
+                    character_count += len(words[end])
+                    current_length += 1 + len(words[end])
+                    end += 1
                 else:
                     break
-            result.append(self.assemlbe_line(i, j, character_count, maxWidth, words))
-            i = j
+            result.append(self.assemlbe_line(start, end, character_count, maxWidth, words))
+            start = end
         return result
 
     def assemlbe_line(self, start: int, end: int, character_count: int, maxWidth: int, words: List[str]) -> str:
@@ -31,22 +31,22 @@ class Solution:
         else:
             space_count = maxWidth - character_count
             places_needed = end - start - 1
+            slice_size = space_count // places_needed
 
-            size = space_count // places_needed
-
-            if space_count == size * places_needed:
-                return (" " * size).join(words[start:end])
+            if space_count == slice_size * places_needed:
+                return (" " * slice_size).join(words[start:end])
             else:
-                left, last = size + 1, size
+                big_slice_count = space_count % places_needed
+                multiplier = slice_size + 1
                 line = ""
                 for i in range(start, end):
                     line += words[i]
-                    if i < end - 2 and len(line) + left + len(words[i + 1]) + last + len(words[i + 2]) <= maxWidth:
-                        line += left * " "
-                    elif i == end - 2:
-                        line += last * " "
-                    places_needed -= 1
-
+                    line += multiplier * " "
+                    big_slice_count -= 1
+                    if big_slice_count == 0:
+                        multiplier -= 1
+                    if i == end - 2:
+                        multiplier = 0
         return line
 
 
