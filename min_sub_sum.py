@@ -8,30 +8,27 @@ class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
         actual_sum, start, end, min_len = 0, 0, 0, len(nums)
 
-        while end < len(nums) or actual_sum > target:
-            if actual_sum < target:
-                actual_sum += nums[end]
-                end += 1
-            else:
-                min_len = min(min_len, end - start)
-                if min_len == 1:
-                    return 1
-                while start < end:
-                    if actual_sum - nums[start] >= target:
-                        actual_sum -= nums[start]
-                        start += 1
-                        min_len = min(min_len, end - start)
-                        if min_len == 1:
-                            return 1
-                    else:
-                        if end < len(nums):
-                            actual_sum += nums[end]
-                            end += 1
-                        else:
-                            return min_len
+        while actual_sum < target and end < len(nums):
+            actual_sum += nums[end]
+            end += 1
 
         if actual_sum < target:
             return 0
+
+        while end < len(nums) or actual_sum > target:
+            while start < end:
+                min_len = min(min_len, end - start)
+                if min_len == 1:
+                    return 1
+
+                if actual_sum - nums[start] >= target:
+                    actual_sum -= nums[start]
+                    start += 1
+                elif end < len(nums):
+                    actual_sum += nums[end]
+                    end += 1
+                else:
+                    return min_len
 
         return min_len
 
