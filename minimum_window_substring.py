@@ -6,7 +6,7 @@ from typing import Dict, Set
 
 class Solution:
 
-    def reduce(self, s: str, start: int, end: int, surplus: Dict, keys: Set) -> (str, int, int):
+    def reduce(self, s: str, start: int, end: int, surplus: Dict, keys: Set) -> int:
         while start < end:
             if s[start] in surplus:
                 surplus[s[start]] -= 1
@@ -15,7 +15,7 @@ class Solution:
             elif s[start] in keys:
                 break
             start += 1
-        return s, start, end
+        return start
 
     def minWindow(self, s: str, t: str) -> str:
         min_substring = ""
@@ -46,7 +46,7 @@ class Solution:
         if len(needed) == 0:
             while start < len_s:
 
-                s, start, end = self.reduce(s, start, end, surplus, keys)
+                start = self.reduce(s, start, end, surplus, keys)
 
                 if len(s[start:end]) < len(min_substring) or len(min_substring) == 0:
                     min_substring = s[start:end]
