@@ -29,7 +29,7 @@ class Solution:
                 for i in range(len(matrix) - 1, -1, -1):
                     result.append(matrix[i][0])
                     del matrix[i][0]
-                    
+
         return result
 
 
