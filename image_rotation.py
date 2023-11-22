@@ -9,9 +9,10 @@ class Solution:
         n = len(matrix)
 
         for i in range(n):
-            row = [0] * n
+            row = []
             for j in range(n):
-                row[n - j - 1] = matrix[j][i]
+                row.insert(0, matrix[j][0])
+                del matrix[j][0]
             matrix.append(row)
 
         for i in range(n):
