@@ -29,22 +29,24 @@ class Solution:
         return neighbours
 
     def gameOfLife(self, board: List[List[int]]) -> None:
-        next_state = {}
+        m, n = len(board), len(board[0])
+        next_state = [[0] * n for _ in range(m)]
         for r in range(len(board)):
             for c in range(len(board[0])):
                 neighbours = self.getLiveNeighbours(board, r, c)
                 if neighbours < 2 or neighbours > 3:
-                    next_state[(r, c)] = 0
+                    next_state[r][c] = 0
                 elif neighbours == 2:
-                    next_state[(r, c)] = board[r][c]
+                    next_state[r][c] = board[r][c]
                 elif neighbours == 3:
                     if board[r][c] == 0:
-                        next_state[(r, c)] = 1
+                        next_state[r][c] = 1
                     else:
-                        next_state[(r, c)] = board[r][c]
+                        next_state[r][c] = board[r][c]
 
-        for k, v in next_state.items():
-            board[k[0]][k[1]] = v
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                board[r][c] = next_state[r][c]
 
 
 class TestStringMethods(unittest.TestCase):
