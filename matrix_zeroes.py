@@ -1,12 +1,12 @@
 import unittest
-from typing import List, Tuple
+from typing import List, Tuple, Any
 
 
 # https://leetcode.com/problems/set-matrix-zeroes
 
 class Solution:
 
-    def fillZeroes(self, matrix: List[List[int]], coordinate: Tuple[int]) -> None:
+    def fillZeroes(self, matrix: List[List[int]], coordinate: Tuple[int, Any]) -> None:
         for i in range(0, len(matrix)):
             matrix[i][coordinate[1]] = 0
         for i in range(0, len(matrix[0])):
