@@ -1,30 +1,10 @@
 # https://leetcode.com/problems/linked-list-cycle
 
 import unittest
-from typing import Optional, List
+from typing import Optional
 
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-
-def build_list(nums: List[int], pos: int) -> Optional[ListNode]:
-    head, ptr = None, None
-    cycle = None
-    for i in range(0, len(nums)):
-        node = ListNode(nums[i], None)
-        if i == pos:
-            cycle = node
-
-        if head is None:
-            ptr = head = node
-
-        ptr.next = node
-        ptr = node
-    ptr.next = cycle
-    return head
+from linked_list_sum import ListNode
+from linked_list_utils import build_list_with_cycle
 
 
 class Solution:
@@ -40,9 +20,9 @@ class Solution:
 
 class TestStringMethods(unittest.TestCase):
     def test_a(self):
-        linked = build_list([3, 2, 0, -4], 1)
+        linked = build_list_with_cycle([3, 2, 0, -4], 1)
         self.assertEqual(True, Solution().hasCycle(linked))
 
     def test_b(self):
-        linked = build_list([3, 2, 0, -4], -1)
+        linked = build_list_with_cycle([3, 2, 0, -4], -1)
         self.assertEqual(False, Solution().hasCycle(linked))

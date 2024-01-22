@@ -1,34 +1,15 @@
 # https://leetcode.com/problems/add-two-numbers
 
 import unittest
-from typing import Optional, List
+from typing import Optional
+
+from linked_list_utils import build_list, verify_list
 
 
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
-
-def build_list(nums: List[int]) -> Optional[ListNode]:
-    head, ptr = None, None
-    for i in range(0, len(nums)):
-        node = ListNode(nums[i], None)
-        if head is None:
-            ptr = head = node
-        ptr.next = node
-        ptr = node
-    return head
-
-
-def verify_list(nums: List[int], head: Optional[ListNode]) -> bool:
-    i = 0
-    while head is not None:
-        if head.val != nums[i]:
-            return False
-        i += 1
-        head = head.next
-    return True
 
 
 class Solution:
