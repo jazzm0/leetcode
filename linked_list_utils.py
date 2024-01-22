@@ -26,9 +26,9 @@ def build_list_with_cycle(nums: List[int], pos: int) -> Optional[ListNode]:
             cycle = node
 
         if head is None:
-            ptr = head = node
-
-        ptr.next = node
+            head = node
+        else:
+            ptr.next = node
         ptr = node
     ptr.next = cycle
     return head
@@ -40,8 +40,8 @@ def build_list(nums: List[int]) -> Optional[ListNode]:
         node = ListNode(nums[i], None)
 
         if head is None:
-            ptr = head = node
-
-        ptr.next = node
+            head = node
+        else:
+            ptr.next = node
         ptr = node
     return head

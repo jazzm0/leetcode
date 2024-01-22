@@ -17,7 +17,7 @@ class Solution:
             node = Node(nums[i][0], None)
             node_addresses.append(node)
             if head is None:
-                ptr = head = node
+                head = node
             else:
                 ptr.next = node
             ptr = node
