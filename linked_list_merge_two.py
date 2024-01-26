@@ -3,13 +3,7 @@
 import unittest
 from typing import Optional
 
-from linked_list_utils import build_list, verify_list
-
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+from linked_list_utils import build_list, verify_list, ListNode
 
 
 class Solution:
