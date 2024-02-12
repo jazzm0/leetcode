@@ -14,6 +14,8 @@ def verify_list(nums: List[int], head: Optional[ListNode]) -> bool:
             return False
         i += 1
         head = head.next
+    if i < len(nums):
+        return False
     return True
 
 
