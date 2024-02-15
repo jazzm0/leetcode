@@ -4,14 +4,12 @@ import unittest
 
 
 class Solution:
-    
+
     def is_divisor(self, s: str, d: str) -> bool:
         if len(d) > 0 and len(s) % len(d) != 0:
             return False
         count = len(s) // len(d)
-        if d * count == s:
-            return True
-        return False
+        return True if d * count == s else False
 
     def gcdOfStrings(self, str1: str, str2: str) -> str:
         gcd = ""
