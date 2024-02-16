@@ -6,12 +6,13 @@ from typing import List
 
 
 class Solution:
-    def find_next_higher_position(self, values_index: int, min_index: int, values: List[int], positions: dict) -> int:
+    def find_next_higher_position(self, values_index: int, min_index: int, values: List[int], positions: dict) -> (
+    int, int):
         for i in range(values_index + 1, len(values)):
             next_index = bisect_left(positions[values[i]], min_index)
             if next_index < len(positions[values[i]]) and positions[values[i]][next_index] > min_index:
-                return positions[values[i]][next_index]
-        return -1
+                return i, positions[values[i]][next_index]
+        return None, -1
 
     def increasingTriplet(self, nums: List[int]) -> bool:
         n = len(nums)
@@ -27,10 +28,9 @@ class Solution:
                 positions[nums[i]].append(i)
         values = sorted(values)
         for i in range(len(values)):
-            next_index = self.find_next_higher_position(i, positions[values[i]][0], values, positions)
+            next_next, next_index = self.find_next_higher_position(i, positions[values[i]][0], values, positions)
             if next_index >= 0:
-                next_next = bisect_left(values, nums[next_index])
-                if self.find_next_higher_position(next_next, next_index, values, positions) > 0:
+                if self.find_next_higher_position(next_next, next_index, values, positions)[1] > 0:
                     return True
         return False
 
