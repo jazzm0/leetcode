@@ -16,19 +16,18 @@ class Solution:
     #         if i == len(chars):
     #             break
     #     return ''.join(chars)
-    class Solution:
-        def removeStars(self, s: str) -> str:
-            i = 0
-            while s:
-                if i < len(s) - 1:
-                    if s[i + 1] == "*":
-                        s = s[0:i] + s[i + 2:]
-                        i -= 1
-                    else:
-                        i += 1
+    def removeStars(self, s: str) -> str:
+        i = 0
+        while s:
+            if i < len(s) - 1:
+                if s[i + 1] == "*":
+                    s = s[0:i] + s[i + 2:]
+                    i -= 1
                 else:
-                    break
-            return s
+                    i += 1
+            else:
+                break
+        return s
 
 
 class TestStringMethods(unittest.TestCase):
