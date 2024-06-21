@@ -10,20 +10,18 @@ class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head:
             return
-        ptr = last_odd = head
-        even_ptr = last_even = even_head = head.next
-        while ptr is not None:
-            if ptr.next and ptr.next.next:
-                last_odd = ptr.next = ptr.next.next
-            ptr = ptr.next
-            if even_ptr:
-                if even_ptr.next and even_ptr.next.next:
-                    last_even = even_ptr.next = even_ptr.next.next
+        ptr = head
+        even_ptr = even_head = head.next
+        while ptr.next and even_ptr.next:
+            ptr.next = even_ptr.next
+            if even_ptr.next.next:
+                even_ptr.next = even_ptr.next.next
                 even_ptr = even_ptr.next
+            else:
+                even_ptr.next = None
+            ptr = ptr.next
 
-        last_odd.next = even_head
-        if last_even:
-            last_even.next = None
+        ptr.next = even_head
         return head
 
 
