@@ -21,12 +21,12 @@ class Solution:
 class TestStringMethods(unittest.TestCase):
     def test_a(self):
         l1 = build_list([5, 4, 2, 1])
-        self.assertTrue(6, Solution().pairSum(l1))
+        self.assertEqual(6, Solution().pairSum(l1))
 
     def test_b(self):
         l1 = build_list([4, 2, 2, 3])
-        self.assertTrue(7, Solution().pairSum(l1))
+        self.assertEqual(7, Solution().pairSum(l1))
 
     def test_c(self):
         l1 = build_list([1, 100000])
-        self.assertTrue(100001, Solution().pairSum(l1))
+        self.assertEqual(100001, Solution().pairSum(l1))
