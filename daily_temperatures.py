@@ -7,11 +7,11 @@ from typing import List
 class Solution:
 
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        temperatures = [(temperatures[x], x) for x in range(len(temperatures))]
-        s = [temperatures[0]]
+        s = [(temperatures[0], 0)]
         result = [0] * len(temperatures)
+
         for i in range(1, len(temperatures)):
-            next = temperatures[i]
+            next = (temperatures[i], i)
 
             if len(s) != 0:
 
