@@ -3,21 +3,32 @@
 import unittest
 
 
+def gcd(a: int, b: int) -> int:
+    while b:
+        a, b = b, a % b
+    return a
+
+
+def gcd_str(str1: str, str2: str) -> str:
+    gcd_length = gcd(len(str1), len(str2))
+    candidate = str1[:gcd_length]
+    if str1[:gcd_length] * (len(str2) // gcd_length) == str2 and str1[:gcd_length] * (len(str1) // gcd_length) == str1:
+        return candidate
+    return ""
+
+
 class Solution:
 
-    def is_divisor(self, s: str, d: str) -> bool:
-        if len(d) > 0 and len(s) % len(d) != 0:
-            return False
-        count = len(s) // len(d)
-        return True if d * count == s else False
-
     def gcdOfStrings(self, str1: str, str2: str) -> str:
-        gcd = ""
-        length = min(len(str1), len(str2))
-        for i in range(1, length + 1):
-            if self.is_divisor(str1, str1[:i]) and self.is_divisor(str2, str1[:i]):
-                gcd = str1[:i]
-        return gcd
+
+        if len(str1) < len(str2):
+            return gcd_str(str1, str2)
+        elif len(str1) > len(str2):
+            return gcd_str(str2, str1)
+        else:
+            if str1 != str2:
+                return ""
+            return str1
 
 
 class TestStringMethods(unittest.TestCase):
@@ -31,7 +42,4 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual("", Solution().gcdOfStrings("LEET", "CODE"))
 
     def test_d(self):
-        self.assertEqual(True, Solution().is_divisor("ABAB", "AB"))
-
-    def test_e(self):
-        self.assertEqual(False, Solution().is_divisor("ABAB", "A"))
+        self.assertEqual(21, gcd(252, 105))
